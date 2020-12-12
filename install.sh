@@ -130,7 +130,7 @@ check_port(){
 install_nginx(){
     green "$(date +"%Y-%m-%d %H:%M:%S") ==== 安装nginx"
     $systemPackage install -y nginx
-    if [ -f "/etc/nginx" ]; then
+    if [ ! -d "/etc/nginx" ]; then
         red "$(date +"%Y-%m-%d %H:%M:%S") - 看起来nginx没有安装成功，请先使用脚本中的删除xray功能，然后再重新安装.\n== Install failed."
         exit 1
     fi
@@ -426,7 +426,7 @@ function start_menu(){
     ;;
     2)
     bash <(curl -L https://raw.githubusercontent.com/XTLS/Xray-install/main/install-release.sh)
-    systemctl restart x2ray
+    systemctl restart xray
     ;;
     3)
     remove_xray 
